@@ -1,0 +1,10 @@
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.csproj.AssemblyReference.cache
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.mainform.resources
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.Properties.Resources.resources
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.csproj.GenerateResource.cache
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.csproj.CoreCompileInputs.cache
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\bin\Debug\ClearLogs.exe.config
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\bin\Debug\ClearLogs.exe
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\bin\Debug\ClearLogs.pdb
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.exe
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.pdb

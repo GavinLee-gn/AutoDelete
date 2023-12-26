@@ -8,3 +8,4 @@ C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\bin\Debug\ClearLogs.exe
 C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\bin\Debug\ClearLogs.pdb
 C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.exe
 C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.pdb
+C:\Users\Gavin\source\repos\ClearLogs\ClearLogs\obj\Debug\ClearLogs.csproj.SuggestedBindingRedirects.cache

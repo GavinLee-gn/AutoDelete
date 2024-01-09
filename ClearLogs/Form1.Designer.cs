@@ -44,6 +44,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBoxMove = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -156,6 +157,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.checkBoxMove);
             this.groupBox3.Controls.Add(this.labelNextRunTime);
             this.groupBox3.Controls.Add(this.checkBoxDaily);
             this.groupBox3.Location = new System.Drawing.Point(3, 107);
@@ -168,7 +170,7 @@
             // labelNextRunTime
             // 
             this.labelNextRunTime.AutoSize = true;
-            this.labelNextRunTime.Location = new System.Drawing.Point(14, 56);
+            this.labelNextRunTime.Location = new System.Drawing.Point(72, 10);
             this.labelNextRunTime.Name = "labelNextRunTime";
             this.labelNextRunTime.Size = new System.Drawing.Size(116, 18);
             this.labelNextRunTime.TabIndex = 1;
@@ -251,6 +253,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 283);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
+            // checkBoxMove
+            // 
+            this.checkBoxMove.AutoSize = true;
+            this.checkBoxMove.Location = new System.Drawing.Point(9, 59);
+            this.checkBoxMove.Name = "checkBoxMove";
+            this.checkBoxMove.Size = new System.Drawing.Size(106, 22);
+            this.checkBoxMove.TabIndex = 2;
+            this.checkBoxMove.Text = "整理文件";
+            this.checkBoxMove.UseVisualStyleBackColor = true;
+            // 
             // mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -258,7 +270,7 @@
             this.ClientSize = new System.Drawing.Size(1262, 329);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "mainform";
-            this.Text = "自动删除Log - @Gavin - 20231225";
+            this.Text = "自动删除Log - @Gavin - 20240109";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainform_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -292,6 +304,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelNextRunTime;
+        private System.Windows.Forms.CheckBox checkBoxMove;
     }
 }
 

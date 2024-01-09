@@ -166,6 +166,9 @@ namespace ClearLogs
                 }
                 else if (DateTime.Now.Subtract(lastWriteTime).TotalDays < daysToDelete && lastWriteTime.Date != DateTime.Now.Date)
                 {
+                    if (!checkBoxMove.Checked)                    
+                        continue;                        
+                    
                     // 小于 daysToDelete 天的且不是当天创建的文件按日期分类
                     string subfolderPath = Path.Combine(folderPath, lastWriteTime.ToString("yyyyMM"), lastWriteTime.ToString("yyyyMMdd"));
 

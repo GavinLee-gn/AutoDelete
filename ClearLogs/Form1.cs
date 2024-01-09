@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ClearLogs
@@ -162,8 +163,14 @@ namespace ClearLogs
             }
 
             // 将下一次运行时间显示在窗体上
-            labelNextRunTime.Text = nextRunTime.ToString();
-
+            #region 20240109 原代码
+            // labelNextRunTime.Text = nextRunTime.ToString();
+            #endregion
+            #region 20240109 异步代码
+            UpdateUI(() => {
+                labelNextRunTime.Text = nextRunTime.ToString();
+            });
+            #endregion
             // 创建定时器并设置触发时间为明天
             System.Timers.Timer timer = new System.Timers.Timer(24 * 60 * 60);
             timer.Elapsed += Timer_Elapsed;
@@ -297,7 +304,8 @@ namespace ClearLogs
             btnStart.Enabled = false;
             btnSetPath.Enabled = false;
             btnClear.Enabled = false;
-            lstFolders.Enabled = false;
+            //lstFolders.Enabled = false;
+            
             cmbDeleteDays.Enabled = false;
             checkBoxDaily.Enabled = false;
             labelNextRunTime.Enabled = false;
@@ -308,10 +316,33 @@ namespace ClearLogs
             btnStart.Enabled = true;
             btnSetPath.Enabled = true;
             btnClear.Enabled = true;
-            lstFolders.Enabled = true;
+            //lstFolders.Enabled = true;
             cmbDeleteDays.Enabled = true;
             checkBoxDaily.Enabled = true;
             labelNextRunTime.Enabled = true;
+        }
+
+        private void lstFolders_DoubleClick(object sender, EventArgs e)
+        {
+            
+            if (lstFolders.SelectedIndex != -1)
+            {
+                string folderPath = lstFolders.SelectedItem.ToString();
+                OpenFolder(folderPath);
+            }
+            
+        }
+        private void OpenFolder(string folderPath)
+        {
+            try
+            {
+                // 使用 Process.Start 方法打开选定的文件夹
+                System.Diagnostics.Process.Start("explorer.exe", folderPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"打开文件夹失败！{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 

@@ -88,21 +88,63 @@ namespace ClearLogs
             DisableControls();
 
             int daysToDelete = Convert.ToInt32(cmbDeleteDays.SelectedItem);
-            DeleteFilesOverDays(folders, daysToDelete);
+            #region 20240109 原代码
+            //DeleteFilesOverDays(folders, daysToDelete);
 
-            // 记录文件路径到RichTextBox中
-            appendRichTextBox(richTextBox1,$"任务完成！\n");
+            //// 记录文件路径到RichTextBox中
+            //appendRichTextBox(richTextBox1,$"任务完成！\n");
 
-            //MessageBox.Show("任务完成！");
-            if (checkBoxDaily.Checked)
+            ////MessageBox.Show("任务完成！");
+            //if (checkBoxDaily.Checked)
+            //{
+            //    ScheduleDailyTask();
+            //}
+            //else
+            //{
+            //    EnableControls();
+            //}
+            #endregion
+            #region 20240109 异步代码
+            // 创建并启动新线程
+            Task.Run(() => {
+                DeleteFilesOverDays(folders, daysToDelete);
+
+                // 在主线程中更新界面
+                Invoke(new Action(() =>
+                {
+                    // 记录文件路径到RichTextBox中
+                    appendRichTextBox(richTextBox1, $"任务完成！\n");
+
+                    if (checkBoxDaily.Checked)
+                    {
+                        ScheduleDailyTask();
+                    }
+                    else
+                    {
+                        EnableControls();
+                    }
+                }));
+            });
+            #endregion
+
+        }
+
+        #region 20240109 异步更新防止界面假死
+        private void UpdateUI(Action action)
+        {
+            if (InvokeRequired)
             {
-                ScheduleDailyTask();
+                Invoke(action);
             }
             else
             {
-                EnableControls();
+                action();
             }
         }
+
+
+        #endregion
+
         private void ScheduleDailyTask()
         {
             // 获取当前日期时间
@@ -218,13 +260,29 @@ namespace ClearLogs
                 }
             }
         }
-        private void appendRichTextBox(RichTextBox richTextBox,string text)
+        #region 20240109 appendRichTextBox原代码
+        //private void appendRichTextBox(RichTextBox richTextBox,string text)
+        //{
+        //    richTextBox.ReadOnly = false;
+        //    richTextBox.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " " + text);
+        //    richTextBox.ScrollToCaret();
+        //    richTextBox.ReadOnly = true;
+        //}
+        #endregion
+       
+        #region 20240109 appendRichTextBox异步代码
+        private void appendRichTextBox(RichTextBox richTextBox, string text)
         {
-            richTextBox.ReadOnly = false;
-            richTextBox.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " " + text);
-            richTextBox.ScrollToCaret();
-            richTextBox.ReadOnly = true;
+            UpdateUI(() => {
+                richTextBox.ReadOnly = false;
+                richTextBox.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + " " + text);
+                richTextBox.ScrollToCaret();
+                richTextBox.ReadOnly = true;
+            });
+
         }
+        #endregion
+
 
         private void mainform_FormClosing(object sender, FormClosingEventArgs e)
         {

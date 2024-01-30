@@ -27,6 +27,7 @@ namespace ClearLogs
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            this.Text += "20240130 - 创建时间 - "; // 修改为creation time
             LoadConfigFile(); // 加载设定档案
         }
 
@@ -79,6 +80,9 @@ namespace ClearLogs
             {
                 if (Directory.Exists(folder))
                 {
+                    // 处理UNC路径
+                    //string path = folder.StartsWith("\\\\") ? folder.Replace("\\", "\\\\") : folder;
+                    //DeleteFilesInFolder(path, daysToDelete);
                     DeleteFilesInFolder(folder, daysToDelete);
                 }
             }
@@ -163,9 +167,7 @@ namespace ClearLogs
             }
 
             // 将下一次运行时间显示在窗体上
-            #region 20240109 原代码
-            // labelNextRunTime.Text = nextRunTime.ToString();
-            #endregion
+
             #region 20240109 异步代码
             UpdateUI(() => {
                 labelNextRunTime.Text = nextRunTime.ToString();
@@ -192,12 +194,16 @@ namespace ClearLogs
         }
         private void DeleteFilesInFolder(string folderPath, int daysToDelete)
         {
+            // 处理UNC路径
+            // string path = folderPath.StartsWith("\\\\") ? folderPath.Replace("\\", "\\\\") : folderPath;
+            // string[] files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
             string[] files = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
+            
 
             foreach (var file in files)
             {
-                DateTime lastWriteTime = File.GetLastWriteTime(file);
-                if (DateTime.Now.Subtract(lastWriteTime).TotalDays > daysToDelete)
+                DateTime creatTime = File.GetCreationTime(file);
+                if (DateTime.Now.Subtract(creatTime).TotalDays > daysToDelete)
                 {
                     try
                     {
@@ -213,13 +219,13 @@ namespace ClearLogs
                         appendRichTextBox(richTextBox1, $"删除文件[{file}]失败！{ex}\n");
                     }
                 }
-                else if (DateTime.Now.Subtract(lastWriteTime).TotalDays < daysToDelete && lastWriteTime.Date != DateTime.Now.Date)
+                else if (DateTime.Now.Subtract(creatTime).TotalDays < daysToDelete && creatTime.Date != DateTime.Now.Date)
                 {
                     if (!checkBoxMove.Checked)                    
                         continue;                        
                     
                     // 小于 daysToDelete 天的且不是当天创建的文件按日期分类
-                    string subfolderPath = Path.Combine(folderPath, lastWriteTime.ToString("yyyyMM"), lastWriteTime.ToString("yyyyMMdd"));
+                    string subfolderPath = Path.Combine(folderPath, creatTime.ToString("yyyyMM"), creatTime.ToString("yyyyMMdd"));
 
                     if (!Directory.Exists(subfolderPath))
                     {
@@ -309,6 +315,7 @@ namespace ClearLogs
             cmbDeleteDays.Enabled = false;
             checkBoxDaily.Enabled = false;
             labelNextRunTime.Enabled = false;
+            checkBoxMove.Enabled = false;
         }
 
         private void EnableControls()
@@ -320,6 +327,7 @@ namespace ClearLogs
             cmbDeleteDays.Enabled = true;
             checkBoxDaily.Enabled = true;
             labelNextRunTime.Enabled = true;
+            checkBoxMove.Enabled = true;
         }
 
         private void lstFolders_DoubleClick(object sender, EventArgs e)

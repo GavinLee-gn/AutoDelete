@@ -36,9 +36,9 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.lstFolders = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labelNextRunTime = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBoxMove = new System.Windows.Forms.CheckBox();
-            this.labelNextRunTime = new System.Windows.Forms.Label();
             this.checkBoxDaily = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -154,6 +154,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "第二步";
             // 
+            // labelNextRunTime
+            // 
+            this.labelNextRunTime.AutoSize = true;
+            this.labelNextRunTime.Location = new System.Drawing.Point(6, 74);
+            this.labelNextRunTime.Name = "labelNextRunTime";
+            this.labelNextRunTime.Size = new System.Drawing.Size(116, 18);
+            this.labelNextRunTime.TabIndex = 1;
+            this.labelNextRunTime.Text = "下次运行时间";
+            // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -177,15 +186,6 @@
             this.checkBoxMove.TabIndex = 2;
             this.checkBoxMove.Text = "整理文件";
             this.checkBoxMove.UseVisualStyleBackColor = true;
-            // 
-            // labelNextRunTime
-            // 
-            this.labelNextRunTime.AutoSize = true;
-            this.labelNextRunTime.Location = new System.Drawing.Point(6, 74);
-            this.labelNextRunTime.Name = "labelNextRunTime";
-            this.labelNextRunTime.Size = new System.Drawing.Size(116, 18);
-            this.labelNextRunTime.TabIndex = 1;
-            this.labelNextRunTime.Text = "下次运行时间";
             // 
             // checkBoxDaily
             // 
@@ -271,7 +271,7 @@
             this.ClientSize = new System.Drawing.Size(1262, 329);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "mainform";
-            this.Text = "自动删除Log - @Gavin - 20240109";
+            this.Text = "自动删除Log - @Gavin - ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainform_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
